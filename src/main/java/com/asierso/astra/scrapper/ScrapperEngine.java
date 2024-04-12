@@ -14,7 +14,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 /**
  *
- * @author asier
+ * @author Asierso
  */
 public class ScrapperEngine {
 

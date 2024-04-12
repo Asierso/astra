@@ -5,7 +5,7 @@ import java.util.List;
 
 /**
  *
- * @author asier
+ * @author Asierso
  */
 public class ClientRequest {
     public enum ClientActions {MODEL,MODEL_LIST,HOOK,HOOK_LIST,EXIT}

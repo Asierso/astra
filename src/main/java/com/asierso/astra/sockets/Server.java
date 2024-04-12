@@ -6,7 +6,7 @@ import java.net.Socket;
 
 /**
  *
- * @author asier
+ * @author Asierso
  */
 public class Server {
 

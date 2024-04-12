@@ -1,12 +1,9 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package com.asierso.astra.exceptions;
 
 /**
  *
- * @author sobblaas
+ * @author Asierso
  */
 public class RequestException extends Exception{
     private int status;

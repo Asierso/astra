@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package com.asierso.astra;
 
 import com.asierso.astra.exceptions.ModelLoadException;
@@ -17,22 +14,22 @@ import java.util.TreeMap;
 
 /**
  *
- * @author asier
+ * @author Asierso
  */
 public class CacheModels {
 
     private final TreeMap<String, ScrapperManifest> modelsCache;
-    private static CacheModels gModels;
+    private static CacheModels cachedModels;
 
     private CacheModels() {
         modelsCache = new TreeMap<>();
     }
 
     public static CacheModels getInstance() {
-        if (gModels == null) {
-            gModels = new CacheModels();
+        if (cachedModels == null) {
+            cachedModels = new CacheModels();
         }
-        return gModels;
+        return cachedModels;
     }
 
     public String loadModelManifest(FileManager file) throws ModelLoadException {

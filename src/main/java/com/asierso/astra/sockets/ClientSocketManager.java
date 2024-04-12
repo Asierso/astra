@@ -20,7 +20,7 @@ import java.util.Map;
 
 /**
  *
- * @author asier
+ * @author Asierso
  */
 public class ClientSocketManager implements Runnable {
 

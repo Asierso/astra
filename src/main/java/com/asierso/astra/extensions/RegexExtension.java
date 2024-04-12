@@ -7,13 +7,16 @@ import java.util.regex.Pattern;
 
 /**
  *
- * @author asier
+ * @author Asierso
  */
 public class RegexExtension {
 
     public static String replaceVars(String text, List<String> args) {
+    	//Load pattern "$N"
         Pattern pattern = Pattern.compile("\\$\\d+", Pattern.CASE_INSENSITIVE);
         Matcher matcher = pattern.matcher(text);
+        
+        //Make replacement
         StringBuilder replace = new StringBuilder();
         while (matcher.find()) {
             int index = Integer.parseInt(matcher.group().substring(1));
