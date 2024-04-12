@@ -1,0 +1,5 @@
+/models/
+/target/
+.classpath
+.project
+/.settings/
