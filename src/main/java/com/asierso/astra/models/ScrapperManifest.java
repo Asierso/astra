@@ -14,6 +14,7 @@ public class ScrapperManifest {
     private String version;
     private List<Action> actions;
     private List<Hook> hooks;
+    private List<String> args;
 
     public String getName() {
         return name;
@@ -54,5 +55,13 @@ public class ScrapperManifest {
         }
         return hooksName;
     }
+    
+    public List<String> getArgs() {
+		return args;
+	}
+    
+    public void setArgs(List<String> args) {
+		this.args = args;
+	}
 
 }

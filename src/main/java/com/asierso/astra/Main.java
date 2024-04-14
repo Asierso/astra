@@ -1,8 +1,10 @@
 
 package com.asierso.astra;
 
+import com.asierso.astra.extensions.DigestExtension;
 import com.asierso.astra.sockets.Server;
 import java.io.File;
+import java.util.Scanner;
 
 /**
  *
@@ -36,7 +38,20 @@ public class Main {
         } else {
             //Create folder and exit
             dir.mkdir();
-            System.out.println("Folder models created. Insert .json models and start server again");
+            System.out.println("Folder models created");	
+            
+            //Passphrase
+            Scanner sc = new Scanner(System.in);
+            System.out.print("You want to create an access passprase (y/n)?: ");
+            if(sc.nextLine().toLowerCase().charAt(0) == 'y') {
+            	System.out.print("Passphrase: ");
+            	String key = sc.nextLine();
+            	if(!key.isBlank()) {
+            		FileManager tokenFile = new FileManager(".token");
+            		tokenFile.write(DigestExtension.toMD5(key));
+            	}
+            }
+            System.out.println("Config success. Insert .json models and start server again");
         }
     }
 }

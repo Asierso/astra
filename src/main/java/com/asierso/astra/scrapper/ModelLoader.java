@@ -27,7 +27,7 @@ public class ModelLoader {
 
 	public void run() throws FileNotFoundException, CloneNotSupportedException, HookException {
 		// Start scrapping engine
-		scrapper = new ScrapperEngine();
+		scrapper = new ScrapperEngine(scm.getArgs());
 		System.out.println("Loading model " + scm.getName() + " ver: " + scm.getVersion());
 
 		// Start executing model

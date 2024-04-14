@@ -33,6 +33,19 @@ public class FileManager {
         return this.content;
     }
     
+    public String readByLines() throws FileNotFoundException {
+    	if (this.content == null || this.content.isBlank()) {
+            StringBuilder contBuild = new StringBuilder();
+            try (Scanner sc = new Scanner(new File(source))) {
+                while (sc.hasNextLine()) {
+                    contBuild.append(sc.nextLine() + "\n");
+                }
+            }
+            this.content = contBuild.toString();
+        }
+        return this.content;
+    }
+    
     public void write(String data) throws IOException{
         try (FileWriter fw = new FileWriter(source)) {
             fw.write(data);

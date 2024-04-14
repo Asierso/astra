@@ -8,10 +8,10 @@ import java.util.List;
  * @author Asierso
  */
 public class ClientRequest {
-    public enum ClientActions {MODEL,MODEL_LIST,HOOK,HOOK_LIST,EXIT}
     private ClientActions action;
     private List<String> parameters;
     private String model;
+    private String token;
     private String hook;
 
     public ClientActions getAction() {
@@ -46,4 +46,11 @@ public class ClientRequest {
         this.hook = hook;
     }
     
+    public String getToken() {
+		return token;
+	}
+    
+    public void setToken(String token) {
+		this.token = token;
+	}
 }
