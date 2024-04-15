@@ -10,6 +10,7 @@ import com.asierso.astra.extensions.RegexExtension;
 import com.asierso.astra.models.requests.ClientRequest;
 import com.asierso.astra.models.requests.ClientResponse;
 import com.asierso.astra.scrapper.ModelLoader;
+import com.asierso.astra.secure.SecureCipher;
 import com.google.gson.Gson;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -30,6 +31,7 @@ import java.util.Map;
 public class ClientSocketManager implements Runnable {
 
 	private final Socket client;
+	private SecureCipher crypt;
 	private boolean running;
 
 	public ClientSocketManager(Socket client) {
@@ -45,18 +47,21 @@ public class ClientSocketManager implements Runnable {
 			PrintWriter out = new PrintWriter(client.getOutputStream(), true);
 			BufferedReader in = new BufferedReader(new InputStreamReader(client.getInputStream()));
 			
+			//Handshake (key exchanger)
+			keysExchanger(out, in);
+			
 			running = true;
 
 			String buffer;
 			while ((buffer = in.readLine()) != null && running) {
-				ClientRequest req = new Gson().fromJson(buffer, ClientRequest.class);
+				ClientRequest req = new Gson().fromJson(crypt.decrypt(buffer), ClientRequest.class);
 				ClientResponse res = new ClientResponse();
 
 				if (!DigestExtension.verifyToken(req.getToken())) {
 					res.setStatus(500);
 					res.setBody("Invalid token");
 					// Return client response and force error
-					out.println(new Gson().toJson(res));
+					out.println(crypt.encrypt(new Gson().toJson(res)));
 					throw new AutenticationException();
 				}
 
@@ -127,7 +132,7 @@ public class ClientSocketManager implements Runnable {
 					}
 				}
 				// Return client response
-				out.println(new Gson().toJson(res));
+				out.println(crypt.encrypt(new Gson().toJson(res)));
 			}
 			client.close();
 
@@ -164,5 +169,11 @@ public class ClientSocketManager implements Runnable {
 
 	private void logStatus(int status, String message) {
 		System.out.println("Client " + client.getInetAddress() + " - Status " + status + ": " + message);
+	}
+	
+	private void keysExchanger(PrintWriter out,BufferedReader in) throws Exception{
+		this.crypt = new SecureCipher();
+		out.println(crypt.getPubkey());
+		crypt.setTargetPubkey(in.readLine());
 	}
 }
