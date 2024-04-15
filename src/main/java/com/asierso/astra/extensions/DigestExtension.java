@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
+import java.util.Random;
 
 import com.asierso.astra.FileManager;
 
@@ -37,6 +38,17 @@ public class DigestExtension {
 
 		// Server unprotected
 		return true;
-
+	}
+	
+	public static String generateToken(int length) {
+		char[] keydict = "abcdefghijklmnopqrstuvwxyz0123456789".toCharArray();
+		StringBuilder res = new StringBuilder();
+		
+		Random rdm = new Random();
+		
+		for(int i = 0;i<length;i++) {
+			res.append(keydict[rdm.nextInt(0,keydict.length)]);
+		}
+		return "atk_"+res.toString();
 	}
 }
