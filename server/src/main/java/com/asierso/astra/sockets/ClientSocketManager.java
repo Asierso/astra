@@ -54,14 +54,14 @@ public class ClientSocketManager implements Runnable {
 
 			String buffer;
 			while ((buffer = in.readLine()) != null && running) {
-				ClientRequest req = new Gson().fromJson(crypt.decrypt(buffer), ClientRequest.class);
+				ClientRequest req = new Gson().fromJson(crypt.symDecrypt(buffer), ClientRequest.class);
 				ClientResponse res = new ClientResponse();
 
 				if (!DigestExtension.verifyToken(req.getToken())) {
 					res.setStatus(500);
 					res.setBody("Invalid token");
 					// Return client response and force error
-					out.println(crypt.encrypt(new Gson().toJson(res)));
+					out.println(crypt.symEncrypt(new Gson().toJson(res)));
 					throw new AutenticationException();
 				}
 
@@ -132,7 +132,7 @@ public class ClientSocketManager implements Runnable {
 					}
 				}
 				// Return client response
-				out.println(crypt.encrypt(new Gson().toJson(res)));
+				out.println(crypt.symEncrypt(new Gson().toJson(res)));
 			}
 			client.close();
 
@@ -175,5 +175,7 @@ public class ClientSocketManager implements Runnable {
 		this.crypt = new SecureCipher();
 		out.println(crypt.getPubkey());
 		crypt.setTargetPubkey(in.readLine());
+		out.println(crypt.asymEncrypt(crypt.generateSimkey()));
+		//System.out.println("Handshake: " + in.readLine());
 	}
 }

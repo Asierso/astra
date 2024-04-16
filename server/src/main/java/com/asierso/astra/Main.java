@@ -3,6 +3,8 @@ package com.asierso.astra;
 
 import com.asierso.astra.extensions.DigestExtension;
 import com.asierso.astra.sockets.Server;
+import com.asierso.astracommons.TokenExtension;
+
 import java.io.File;
 import java.util.Scanner;
 
@@ -46,7 +48,7 @@ public class Main {
 			Scanner sc = new Scanner(System.in);
 			System.out.print("Generate access token (y/n)?: ");
 			if (sc.nextLine().toLowerCase().charAt(0) == 'y') {
-				String token = DigestExtension.generateToken(25);
+				String token = TokenExtension.generateToken(25);
 				FileManager tokenFile = new FileManager(".token");
 				tokenFile.write(DigestExtension.toMD5(token));
 				

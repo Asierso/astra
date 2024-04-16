@@ -27,7 +27,13 @@ public class ModelLoader {
 
 	public void run() throws FileNotFoundException, CloneNotSupportedException, HookException {
 		// Start scrapping engine
-		scrapper = new ScrapperEngine(scm.getArgs());
+		if (scm.getArgs() != null) {
+			ArrayList<String> clArgs = new ArrayList<String>();
+			clArgs.addAll(scm.getArgs());
+			scrapper = new ScrapperEngine(clArgs);
+		} else {
+			scrapper = new ScrapperEngine(scm.getArgs());
+		}
 		System.out.println("Loading model " + scm.getName() + " ver: " + scm.getVersion());
 
 		// Start executing model
@@ -67,10 +73,8 @@ public class ModelLoader {
 
 			// Action points to another hook
 			if (obj.getType() == ActionTypes.HOOK) {
-				output.addAll(executeHook(obj.getParameters(), 
-						obj.isUseparameters()?
-						hookParameters :
-						(ArrayList<String>) obj.getBody()));
+				output.addAll(executeHook(obj.getParameters(),
+						obj.isUseparameters() ? hookParameters : (ArrayList<String>) obj.getBody()));
 			} else {
 				// Execute action
 				output.add(scrapper.executeAction(obj));
