@@ -2,9 +2,13 @@
 package com.asierso.astra.scrapper;
 
 import com.asierso.astracommons.exceptions.ActionException;
+import com.asierso.astra.FileManager;
 import com.asierso.astra.models.Action;
+import com.asierso.astra.models.ActionTypes;
 import com.asierso.astra.models.Action.FindableBy;
 import static com.asierso.astra.models.Action.FindableBy.*;
+
+import java.io.FileNotFoundException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -32,11 +36,11 @@ public class ScrapperEngine {
 				args.remove("debugmode");
 
 			serv.addArguments(args);
-		} else { //Default args (no args defined)
+		} else { // Default args (no args defined)
 			serv.addArguments("headless");
 		}
-		
-		//Load scrapper driver
+
+		// Load scrapper driver
 		driver = new ChromeDriver(serv);
 	}
 
@@ -112,6 +116,15 @@ public class ScrapperEngine {
 				}
 				for (WebElement handle : target) {
 					output += handle.getAttribute(act.getParameters()) + " ";
+				}
+			}
+			case JS -> {
+				FileManager jsloader = new FileManager(act.getParameters() + ".js");
+				try {
+					String script = jsloader.read();
+					driver.executeScript(script, act.getBody());
+				} catch(FileNotFoundException e) {
+					System.out.println("Script not found exception " + e.getMessage() + " at " + e.getLocalizedMessage());
 				}
 			}
 			}

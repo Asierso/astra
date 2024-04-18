@@ -6,7 +6,7 @@ import com.asierso.astra.extensions.RegexExtension;
 import com.asierso.astra.models.Action;
 import com.asierso.astra.models.Hook;
 import com.asierso.astra.models.ScrapperManifest;
-import com.asierso.astra.models.Action.ActionTypes;
+import com.asierso.astra.models.ActionTypes;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;

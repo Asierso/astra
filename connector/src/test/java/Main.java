@@ -13,9 +13,9 @@ public class Main {
 			AstraConnector conn = new AstraConnector("127.0.0.1", 26700, "atk_yzbk3txxis32a49utxm9sgta2");
 			System.out.println(conn.fetch(new GetModels()));
 			
-			AstraModel m = (AstraModel) conn.fetch(new UseModel("google-test"));
+			AstraModel m = (AstraModel) conn.fetch(new UseModel("hooks-test"));
 			
-			ClientResponse res = (ClientResponse) m.runHook("busqueda",Arrays.asList(new String[] {"xC"}));
+			ClientResponse res = (ClientResponse) m.runHook("search",Arrays.asList(new String[] {"xC"}));
 			
 			System.out.println(res.getOutput());
 			System.out.println(res.getBody());

@@ -33,6 +33,10 @@ public class FileManager {
         return this.content;
     }
     
+    public boolean exists() {
+    	return new File(source).exists();
+    }
+    
     public String readByLines() throws FileNotFoundException {
     	if (this.content == null || this.content.isBlank()) {
             StringBuilder contBuild = new StringBuilder();
