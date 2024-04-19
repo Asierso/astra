@@ -16,7 +16,7 @@
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
-	<distributionManagement>
+	<distributionManagement>  
 		<repository>
 			<id>github</id>
 			<name>GitHub Asierso Apache Maven Packages</name>

@@ -1,4 +1,4 @@
-# Astra Server ¡DOCUMENTACIÓN EN PROCESO!
+# Astra Server
 Servidor de scrapping web basado en arquitectura cliente-servidor. Permite procesar peticiones de 
 scrapping de un cliente limitadas a modelos JSON precargados en el servidor
 
@@ -103,6 +103,9 @@ Las acciones pueden definir más propiedades. Se muestra una tabla donde se reco
 |GET_ATTRIBUTE| nombre: String  | Toma el valor según argumento especificado (en caso de especificarse varios, el argumento se tomará solamente del primero) | Requerido |
 |GET_ALL_ATTRIBUTE| nombre: String  | Toma el valor según argumento especificado | Requerido |
 
+>[!WARNING]
+>En la versión de lanzamiento algunas de estas acciones podrían cambiar de nombre o incluso variar en funcionalidad. Se tiene previsto agregar nuevas funciones
+
 
 ### 👌 Selector de controles (element & finder)
 La seleccion de controles de la página cargada en el scrapper se debe de especificar un modo de seleccion o **finder** y los elementos a seleccionar
@@ -146,5 +149,5 @@ Un hook puede tomar un resultado de ejecución de la secuencia como parámetro, 
 ## 🌐 Argumentos del navegador
 Todos los argumentos soportados por defecto por el navegador Google Chrome se pueden especificar dentro de `args` en el JSON del modelo correspondiente.
 
->[!NOTE]
+>[!TIP]
 >Para habilitar la depuración (fines de testeo del modelo) puede incluir el argumento `degubmode`
