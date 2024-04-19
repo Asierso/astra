@@ -1,0 +1,22 @@
+{
+    "name":"hooks-test",
+    "version":"1.0",
+    "args":["debugmode"],
+    "actions":[
+        {"type":"GOTO","parameters":"https://google.es"},
+        {"type":"GET_TEXT","element":".QS5gu.sy4vM","finder":"CSS"},
+        {"type":"CLICK","element":".QS5gu.sy4vM","finder":"CSS"}
+    ],
+    "hooks": [
+        {"name":"sub-hook","output":"aplicada","actions":[
+            {"type":"PROMPT","element":".gLFyf","finder":"CSS","parameters":"Busqueda de: $0","useparameters":"true"},
+            {"type":"SUBMIT","element":".gNO89b","finder":"CSS"},
+            {"type":"DELAY","parameters":"5000"}
+        ]},
+        {"name":"search","output":"encontrado $3","actions":[
+            {"type":"HOOK","parameters":"sub-hook","useparameters":"true"},
+            {"type":"GET_ALL_TEXT","element":"h3","finder":"TAG"},
+            {"type":"GOTO","parameters":"https://google.es"}
+        ]}
+    ]
+}

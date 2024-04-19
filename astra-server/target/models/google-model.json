@@ -1,0 +1,18 @@
+{
+    "name":"google-test",
+    "version":"1.0",
+    "actions":[
+        {"type":"GOTO","parameters":"https://google.es"},
+        {"type":"GET_TEXT","element":".QS5gu.sy4vM","finder":"CSS"},
+        {"type":"CLICK","element":".QS5gu.sy4vM","finder":"CSS"}
+    ],
+    "hooks": [
+        {"name":"busqueda","output":"encontrado: $3","actions":[
+            {"type":"PROMPT","element":".gLFyf","finder":"CSS","parameters":"Busqueda de: $0","useparameters":"true"},
+            {"type":"SUBMIT","element":".gNO89b","finder":"CSS"},
+            {"type":"DELAY","parameters":"5000"},
+            {"type":"GET_ALL_TEXT","element":"h3","finder":"TAG"},
+            {"type":"GOTO","parameters":"https://google.es"}
+        ]}
+    ]
+}

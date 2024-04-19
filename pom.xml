@@ -11,9 +11,9 @@
         <maven.compiler.target>18</maven.compiler.target>
     </properties>
   <modules>
-  	<module>commons</module>
-  	<module>server</module>
-  	<module>connector</module>
+  	<module>astra-commons</module>
+  	<module>astra-server</module>
+  	<module>astra-connector</module>
   </modules>
   <dependencies>
 	  <dependency>
