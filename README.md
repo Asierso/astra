@@ -1,5 +1,5 @@
 # Astra Server ¡DOCUMENTACIÓN EN PROCESO!
-Servidor de scrapping web basado en arquitectura cliente-servidor. Permite prcesar peticiones de 
+Servidor de scrapping web basado en arquitectura cliente-servidor. Permite procesar peticiones de 
 scrapping de un cliente limitadas a modelos JSON precargados en el servidor
 
 Permite al cliente realizar busquedas automáticas
@@ -43,6 +43,18 @@ Recuerde que para poder usar el paquete debe de agregar la URL del repositorio a
     </repository>
 </distributionManagement>
 ```
+## ⚒️ Building del proyecto
+### Requisitos previos
+- Apache Maven instalado
+- Java JDK 18 o superior
+
+### Procedimiento de compilación
+1. Primeramente clone el repositorio usando `git clone https://github.com/Asierso/astra` o descargue alguna de las versiones de lanzamiento del proyecto
+2. Acceda a la carpeta raíz del repositorio de Astra
+3. Ejecute el comando `mvn package` para generar los ficheros .jar tanto del servidor como del conector cliente
+
+
+
 ## 📋 Definicion de modelos JSON para scrapping 
 Los modelos de scrapping se definen de lado del servidor y se cargan de la carpeta `models` creada en el primer arranque. Todo JSON de modelos tiene la siguiente sintaxis:
 
