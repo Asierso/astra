@@ -75,7 +75,7 @@ Los modelos de scrapping se definen de lado del servidor y se cargan de la carpe
 ```
 >[!NOTE]
 >Es obligatorio que todos los modelos cargados en el servidor tengan un nombre distinto
-
+---
 ### ⚓ Definicion de acciones y acciones de hooks
 Las acciones tanto de arranque del modelo (actions) como de funcionalidad de modelo (hooks) van definidas de la siguiente forma:
 
@@ -103,10 +103,11 @@ Las acciones pueden definir más propiedades. Se muestra una tabla donde se reco
 |GET_ATTRIBUTE| nombre: String  | Toma el valor según argumento especificado (en caso de especificarse varios, el argumento se tomará solamente del primero) | Requerido |
 |GET_ALL_ATTRIBUTE| nombre: String  | Toma el valor según argumento especificado | Requerido |
 
+
 >[!WARNING]
 >En la versión de lanzamiento algunas de estas acciones podrían cambiar de nombre o incluso variar en funcionalidad. Se tiene previsto agregar nuevas funciones
 
-
+---
 ### 👌 Selector de controles (element & finder)
 La seleccion de controles de la página cargada en el scrapper se debe de especificar un modo de seleccion o **finder** y los elementos a seleccionar
 
@@ -122,7 +123,7 @@ En la sintaxis del JSON sería indicado de la siguiente forma:
     "element":"<expresion>",
     "finder":"<ID/CSS/TAG/XPATH>"
 ```
-
+---
 ### ⚓ Definición de hooks
 Un hook es un conjunto de acciones representadas por un nombre. Los hooks pueden ser ejecutados por el cliente para poder realizar las consultas al modelo correspondiente
 
@@ -139,7 +140,7 @@ Un hook tiene la siguiente estructura:
 ```
 
 La salida tanto de los hooks como de las acciones se envía com una lista con los distintos retornos de las consultas realizadas, pero a mayores, los hooks permiten devolver texto con la salida a la que se le aplica una máscara para formatear las líneas en un único texto usando el comodín `$<n>` donde "n" hace referencia al numero de salida de la línea ejecutada en secuencia
-
+---
 ### 📂 Parametros de hooks 
 Los hooks pueden tomar una lista con n número de parámetros (proporcionados por el usuario) para ejecutar las acciones. Para poder acceder a la entrada de parámetros desde una accion interna al hook, use `"useparams":"true"`. Para acceder al parámetro se usa el comodín `$<n>` donde n es la posicion del argumento en la lista.
 
