@@ -1,18 +1,20 @@
 /.settings/
 .project
 
-/commons/target
-/commons/.project
-/commons/.settings/
-/commons/.classpath
+/astra-commons/target
+/astra-commons/.project
+/astra-commons/.settings/
+/astra-commons/.classpath
 
-/server/target/
-/server/.project
-/server/.settings/
-/server/.classpath
+/astra-server/target/
+/astra-server/.project
+/astra-server/.settings/
+/astra-server/.classpath
 
-/connector/target/
-/connector/.project
-/connector/.settings/
-/connector/.classpath
-/connector/src/test/
+/astra-connector/target/
+/astra-connector/.project
+/astra-connector/.settings/
+/astra-connector/.classpath
+/astra-connector/src/test/
+/astra-commons/bin/target/
+/astra-connector/bin/target/
