@@ -2,16 +2,19 @@
 .project
 
 /astra-commons/target
+/astra-commons/bin/
 /astra-commons/.project
 /astra-commons/.settings/
 /astra-commons/.classpath
 
 /astra-server/target/
+/astra-server/bin/
 /astra-server/.project
 /astra-server/.settings/
 /astra-server/.classpath
 
 /astra-connector/target/
+/astra-connector/bin/
 /astra-connector/.project
 /astra-connector/.settings/
 /astra-connector/.classpath
