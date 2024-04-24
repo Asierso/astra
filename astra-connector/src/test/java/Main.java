@@ -10,7 +10,7 @@ public class Main {
 	public static void main(String[] args) {
 		try {
 			Thread.sleep(2000);
-			AstraConnector conn = new AstraConnector("127.0.0.1", 26700, "atk_yzbk3txxis32a49utxm9sgta2");
+			AstraConnector conn = new AstraConnector("192.168.1.22", 26700, "atk_o5sd0fy2gty5xuvcrw5qlornc");
 			System.out.println(conn.fetch(new GetModels()));
 			
 			AstraModel m = (AstraModel) conn.fetch(new UseModel("hooks-test"));

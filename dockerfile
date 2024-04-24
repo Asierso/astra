@@ -15,7 +15,7 @@ RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key
     --no-install-recommends
 
 # Install java jdk 18
-RUN apt-get install openjdk-18-jre
+RUN apt-get install openjdk-18-jre -y
 
 # Create astra home and copy jar
 RUN mkdir /home/astra \
@@ -24,5 +24,7 @@ RUN mkdir /home/astra \
 
 COPY ./astra-server/target/astra-server-*-fullserver-*.jar /home/astra/astra-server.jar
 
+WORKDIR /home/astra
+
 # Start server at execute container
-CMD ["java -jar /home/astra/astra-server.jar"]
+CMD ["java","-jar","/home/astra/astra-server.jar"]

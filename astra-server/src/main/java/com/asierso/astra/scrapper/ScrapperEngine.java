@@ -39,6 +39,10 @@ public class ScrapperEngine {
 		} else { // Default args (no args defined)
 			serv.addArguments("headless");
 		}
+		
+		//Linux support
+		serv.addArguments("--no-sandbox");
+		serv.addArguments("--disable-dev-shm-usage");
 
 		// Load scrapper driver
 		driver = new ChromeDriver(serv);

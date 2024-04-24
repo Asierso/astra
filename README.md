@@ -51,7 +51,7 @@ Recuerde que para poder usar el paquete debe de agregar la URL del repositorio a
 2. Acceda a la carpeta raíz del repositorio de Astra
 3. Ejecute el comando `mvn package` para generar los ficheros .jar tanto del servidor como del conector cliente
 
-## 🐳 Deploy del servidor en Docker
+## 🐳 Deploy del servidor Astra en Docker
 ### Requisitos previos
 - Docker instalado
 - Apache Maven instalado
@@ -59,8 +59,9 @@ Recuerde que para poder usar el paquete debe de agregar la URL del repositorio a
 
 ### Procedimiento de construccion de la imagen
 1. Siga los procedimientos para compilar el proyecto Maven vistos en el apartado anterior para generar los empaquetados
-2. Ejecute en una terminal `docker build -t astra-server` para construir la imagen de docker
-3. Para lanzar el contenedor, ejecute `docker run -it -v $(pwd)/models:/home/astra/models -p 27600:27600 astra-server`
+2. Si desea establecer un token de acceso al servidor, ejecute el servidor usando `mvn exec:jar` por primera vez para generar tanto la carpeta models como el token. En caso de que no, puede crear el directorio "models" de forma manual
+3. Ejecute en una terminal `docker build -t astra-server .` para construir la imagen de docker
+4. Para lanzar el contenedor, ejecute `docker run -d -v <carpeta-models>:/home/astra/models -p 26700:26700 astra-server` donde <carpeta-models> es la carpeta donde se almacenan los modelos JSON del scrapper
 
 ## 📋 Definicion de modelos JSON para scrapping 
 Los modelos de scrapping se definen de lado del servidor y se cargan de la carpeta `models` creada en el primer arranque. Todo JSON de modelos tiene la siguiente sintaxis:
