@@ -1,1 +1,1 @@
-mvn clean deploy -pl astra-connector,astra-commons
+mvn clean deploy -pl astra-connector -am

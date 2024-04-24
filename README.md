@@ -35,13 +35,11 @@ Puede agregar la dependencia a su proyecto Maven con el siguiente código en su 
 Recuerde que para poder usar el paquete debe de agregar la URL del repositorio a su fichero pom.xml.
 
 ```xml
-<distributionManagement>
-    <repository>
-        <id>github</id>
-        <name>GitHub Asierso Apache Maven Packages</name>
-        <url>https://maven.pkg.github.com/Asierso/astra</url>
-    </repository>
-</distributionManagement>
+<repository>
+  <id>github</id>
+  <name>GitHub Asierso Apache Maven Packages</name>
+  <url>https://maven.pkg.github.com/Asierso/astra</url>
+</repository>
 ```
 ## ⚒️ Building del proyecto
 ### Requisitos previos
@@ -53,7 +51,16 @@ Recuerde que para poder usar el paquete debe de agregar la URL del repositorio a
 2. Acceda a la carpeta raíz del repositorio de Astra
 3. Ejecute el comando `mvn package` para generar los ficheros .jar tanto del servidor como del conector cliente
 
+## 🐳 Deploy del servidor en Docker
+### Requisitos previos
+- Docker instalado
+- Apache Maven instalado
+- Java JDK 18 o superior
 
+### Procedimiento de construccion de la imagen
+1. Siga los procedimientos para compilar el proyecto Maven vistos en el apartado anterior para generar los empaquetados
+2. Ejecute en una terminal `docker build -t astra-server` para construir la imagen de docker
+3. Para lanzar el contenedor, ejecute `docker run -it -v $(pwd)/models:/home/astra/models -p 27600:27600 astra-server`
 
 ## 📋 Definicion de modelos JSON para scrapping 
 Los modelos de scrapping se definen de lado del servidor y se cargan de la carpeta `models` creada en el primer arranque. Todo JSON de modelos tiene la siguiente sintaxis:
