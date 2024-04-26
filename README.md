@@ -14,7 +14,7 @@ Permite al cliente realizar busquedas automáticas
 
 ### Procedimiento de instalación
 1. En una terminal lance el servidor con el comando
-```java -jar astra-server-xxx-fullserver-jar-with-dependencies.jar [<puerto>]```. Si no se especifica puerto, por defecto se usará el 26700
+```java -jar astra-server-xxx-fullserver-jar-with-dependencies.jar```. Si se desea ejecutar el servidor para que funcione en un puerto concreto, use el comando ```java -jar astra-server-xxx-fullserver-jar-with-dependencies.jar -p <puerto>``` y especifique el puerto de su preferencia
 2. Al primer arranque se configurará la carpeta de donde el servidor cargará los modelos de scrapping y podrá configurar un token para limitar el acceso (opcional)
 3. El programa se cerrará solo. Pegue los modelos .json en la carpeta 'models' y vuelva a ejecutar el programa servidor
 
@@ -59,7 +59,7 @@ Recuerde que para poder usar el paquete debe de agregar la URL del repositorio a
 
 ### Procedimiento de construccion de la imagen
 1. Siga los procedimientos para compilar el proyecto Maven vistos en el apartado anterior para generar los empaquetados
-2. Si desea establecer un token de acceso al servidor, ejecute el servidor usando `mvn exec:jar` por primera vez para generar tanto la carpeta models como el token. En caso de que no, puede crear el directorio "models" de forma manual
+2. Si desea establecer un token de acceso al servidor, ejecute el jar del servidor con el comando `java -jar astra-server-0.1.0-fullserver-jar-with-dependencies -t -q` desde la raíz del proyecto y conserve el token mostrado por pantalla
 3. Ejecute en una terminal `docker build -t astra-server .` para construir la imagen de docker
 4. Para lanzar el contenedor, ejecute `docker run -d -v <carpeta-models>:/home/astra/models -p 26700:26700 astra-server` donde <carpeta-models> es la carpeta donde se almacenan los modelos JSON del scrapper
 
