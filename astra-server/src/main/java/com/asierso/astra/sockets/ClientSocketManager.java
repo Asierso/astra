@@ -98,9 +98,9 @@ public class ClientSocketManager implements Runnable {
 
 							// Execute hook and replace output vars
 							List<String> output = model.executeHook(req.getHook(),
-									(ArrayList<String>) req.getParameters());
+									(ArrayList<String>) req.getParameters(),null);
 							res.setStatus(200);
-							res.setBody(RegexExtension.replaceVars(model.getScrapperManifest().getHooks().stream()
+							res.setBody(RegexExtension.replaceOutput(model.getScrapperManifest().getHooks().stream()
 									.filter(obj -> obj.getName().equals(req.getHook())).findFirst().get().getOutput(),
 									output));
 							res.setOutput(output);

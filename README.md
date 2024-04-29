@@ -59,7 +59,7 @@ Recuerde que para poder usar el paquete debe de agregar la URL del repositorio a
 
 ### Procedimiento de construccion de la imagen
 1. Siga los procedimientos para compilar el proyecto Maven vistos en el apartado anterior para generar los empaquetados
-2. Si desea establecer un token de acceso al servidor, ejecute el jar del servidor con el comando `java -jar astra-server-0.1.0-fullserver-jar-with-dependencies -t -q` desde la raíz del proyecto y conserve el token mostrado por pantalla
+2. Si desea establecer un token de acceso al servidor, ejecute el jar del servidor con el comando `java -jar astra-server-xxxx-fullserver-jar-with-dependencies -t -q` desde la raíz del proyecto y conserve el token mostrado por pantalla
 3. Ejecute en una terminal `docker build -t astra-server .` para construir la imagen de docker
 4. Para lanzar el contenedor, ejecute `docker run -d -v <carpeta-models>:/home/astra/models -p 26700:26700 astra-server` donde <carpeta-models> es la carpeta donde se almacenan los modelos JSON del scrapper
 

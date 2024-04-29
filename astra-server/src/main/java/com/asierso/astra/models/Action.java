@@ -19,8 +19,8 @@ public class Action implements Cloneable {
 	private String element;
 	private int index;
 	private FindableBy finder;
-	private boolean useoutput;
-	private boolean useparameters;
+	private boolean nooutput;
+	private boolean noparams;
 
 	public ActionTypes getType() {
 		return type;
@@ -54,20 +54,20 @@ public class Action implements Cloneable {
 		this.element = element;
 	}
 
-	public boolean isUseoutput() {
-		return useoutput;
+	public boolean isNoOutput() {
+		return nooutput;
 	}
 
-	public void setUseoutput(boolean useoutput) {
-		this.useoutput = useoutput;
+	public void noOutput(boolean nooutput) {
+		this.nooutput = nooutput;
 	}
 
-	public boolean isUseparameters() {
-		return useparameters;
+	public boolean isNoParams() {
+		return noparams;
 	}
 
-	public void setUseparameters(boolean useparameters) {
-		this.useparameters = useparameters;
+	public void setNoParams(boolean noparams) {
+		this.noparams = noparams;
 	}
 
 	public List<String> getBody() {

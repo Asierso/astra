@@ -31,25 +31,16 @@ public class AstraConnector {
 	private Socket client;
 	private PrintStream out;
 	private BufferedReader in;
-	private String token;
+	private AstraConnection currentConnection;
 	private SecureCipher crypt;
 	
-	public AstraConnector(String ip, int port) throws UnknownHostException, IOException, Exception {
-		initConnector(ip, port, null); //Unprotected astra server mode
-	}
-
-	public AstraConnector(String ip, int port, String token) throws UnknownHostException, IOException, Exception {
-		initConnector(ip, port, token);
-	}
-	
-	private void initConnector(String ip, int port, String token) throws UnknownHostException, IOException, Exception {
-		client = new Socket(ip, port);
+	public AstraConnector(AstraConnection builtConnection) throws UnknownHostException, IOException, Exception {
+		//Create connection by builder
+		client = new Socket(builtConnection.getIp(), builtConnection.getPort());
 		out = new PrintStream(client.getOutputStream());
 		in = new BufferedReader(new InputStreamReader(client.getInputStream()));
-
-		if (token != null && !token.isBlank()) {
-			this.token = token;
-		}
+		
+		this.currentConnection = builtConnection;
 
 		try {
 			keyHandshake();
@@ -60,7 +51,11 @@ public class AstraConnector {
 	}
 
 	public ClientResponse sendRequest(ClientRequest req) throws RequestException, Exception{
-		req.setToken(token);
+		//Set token (if is established)
+		if (currentConnection.getToken() != null) 
+			req.setToken(currentConnection.getToken());
+		
+		//Make request
 		try {
 			out.println(crypt.symEncrypt(new Gson().toJson(req)));
 			return new Gson().fromJson(crypt.symDecrypt(in.readLine()), ClientResponse.class);
@@ -70,7 +65,6 @@ public class AstraConnector {
 		} catch (IOException | JsonSyntaxException e) {
 			throw new RequestException(505, "Bad request or server error");
 		}
-		
 	}
 
 	public Object fetch(Action action) throws Exception {

@@ -37,7 +37,7 @@ public class ModelLoader {
 		System.out.println("Loading model " + scm.getName() + " ver: " + scm.getVersion());
 
 		// Start executing model
-		executeActions(scm.getActions(), null);
+		executeActions(scm.getActions(), null, null);
 
 		System.out.println("Main actions loaded. Waiting hooks");
 
@@ -55,26 +55,29 @@ public class ModelLoader {
 			scrapper.stop();
 	}
 
-	private List<String> executeActions(List<Action> actList, ArrayList<String> hookParameters)
+	private List<String> executeActions(List<Action> actList, ArrayList<String> hookParameters, ArrayList<String> inneritedOutput)
 			throws HookException, CloneNotSupportedException {
 		// Output buffer
-		ArrayList<String> output = new ArrayList<>();
+		ArrayList<String> output;
+		if(inneritedOutput == null)
+			output = new ArrayList<>();
+		else
+			output = inneritedOutput;
 
 		// Secuence action list (actions or executed hook)
 		for (Action handle : actList) {
 			Action obj = handle.clone();
 
 			// Replace output vars
-			if (obj.isUseoutput()) {
-				obj.setParameters(RegexExtension.replaceVars(obj.getParameters(), output));
-			} else if (obj.isUseparameters()) {
-				obj.setParameters(RegexExtension.replaceVars(obj.getParameters(), hookParameters));
-			}
+			if (!obj.isNoOutput() && obj.getParameters() != null && !output.isEmpty())
+				obj.setParameters(RegexExtension.replaceOutput(obj.getParameters(), output));
+			if (!obj.isNoParams() && obj.getParameters() != null) 
+				obj.setParameters(RegexExtension.replaceParameters(obj.getParameters(), hookParameters));
 
 			// Action points to another hook
 			if (obj.getType() == ActionTypes.HOOK) {
 				output.addAll(executeHook(obj.getParameters(),
-						obj.isUseparameters() ? hookParameters : (ArrayList<String>) obj.getBody()));
+						hookParameters, (ArrayList<String>) obj.getBody()));
 			} else {
 				// Execute action
 				output.add(scrapper.executeAction(obj));
@@ -83,15 +86,15 @@ public class ModelLoader {
 		return output;
 	}
 
-	public List<String> executeHook(String hookName, ArrayList<String> parameters)
+	public List<String> executeHook(String hookName, ArrayList<String> parameters, ArrayList<String> inneritedOutput)
 			throws HookException, CloneNotSupportedException {
 		Hook selected = getHook(hookName);
-		return executeActions(selected.getActions(), parameters);
+		return executeActions(selected.getActions(), parameters, inneritedOutput);
 	}
 
-	public String executeHookWithOutput(String hookName, ArrayList<String> parameters)
+	public String executeHookWithOutput(String hookName, ArrayList<String> parameters, ArrayList<String> inneritedOutput)
 			throws HookException, CloneNotSupportedException {
-		return RegexExtension.replaceVars(getHook(hookName).getOutput(), executeHook(hookName, parameters));
+		return RegexExtension.replaceOutput(getHook(hookName).getOutput(), executeHook(hookName, parameters,inneritedOutput));
 	}
 
 	private Hook getHook(String hookName) throws HookException {

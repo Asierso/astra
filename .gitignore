@@ -1,5 +1,6 @@
 /.settings/
 .project
+/models/
 
 /astra-commons/target
 /astra-commons/bin/

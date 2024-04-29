@@ -2,12 +2,17 @@
 package com.asierso.astra;
 
 import com.asierso.astra.extensions.DigestExtension;
+import com.asierso.astra.models.ScrapperManifest;
+import com.asierso.astra.scrapper.ModelLoader;
 import com.asierso.astra.sockets.Server;
 import com.asierso.astracommons.TokenExtension;
 import com.google.common.collect.Multiset.Entry;
+import com.google.gson.Gson;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -61,11 +66,21 @@ public class Main {
 					}
 					case "q" -> // Quit server when configuration parameters processed
 						exitThen = true;
+					case "test" -> { //Only testing purposes
+						System.out.println("Test mode");
+						ModelLoader loader = new ModelLoader(new Gson().fromJson(new FileManager("test.json").read(), ScrapperManifest.class));
+						loader.run();
+						ArrayList<String> p1 = new ArrayList<String>();
+						p1.add("prueba");
+						System.out.println(loader.executeHookWithOutput("test", p1, new ArrayList<String>()));
+						exitThen = true;
+					}
 					default -> throw new Exception();
 					}
 				} catch (IOException e) {
 					e.printStackTrace();
 				} catch (Exception e) {
+					e.printStackTrace();
 					System.out.println("Incorrect argument name or value at arg: " + handle);
 					exitThen = true;
 				}
