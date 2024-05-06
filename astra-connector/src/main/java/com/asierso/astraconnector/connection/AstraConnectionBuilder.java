@@ -1,4 +1,4 @@
-package com.asierso.astraconnector;
+package com.asierso.astraconnector.connection;
 
 public class AstraConnectionBuilder extends AstraConnection {
 	

@@ -1,11 +1,11 @@
 import java.util.Arrays;
 
 import com.asierso.astracommons.requests.ClientResponse;
-import com.asierso.astraconnector.AstraConnectionBuilder;
 import com.asierso.astraconnector.AstraConnector;
 import com.asierso.astraconnector.actions.AstraModel;
-import com.asierso.astraconnector.actions.GetModels;
-import com.asierso.astraconnector.actions.UseModel;
+import com.asierso.astraconnector.actions.operations.GetModels;
+import com.asierso.astraconnector.actions.operations.UseModel;
+import com.asierso.astraconnector.connection.AstraConnectionBuilder;
 
 public class Main {
 	public static void main(String[] args) {

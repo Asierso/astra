@@ -1,6 +1,7 @@
-package com.asierso.astraconnector.actions;
+package com.asierso.astraconnector.actions.operations;
 
 import com.asierso.astraconnector.AstraConnector;
+import com.asierso.astraconnector.actions.Action;
 import com.asierso.astracommons.exceptions.RequestException;
 import com.asierso.astracommons.requests.ClientActions;
 import com.asierso.astracommons.requests.ClientRequest;

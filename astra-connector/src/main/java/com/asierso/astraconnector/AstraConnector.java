@@ -21,6 +21,7 @@ import javax.crypto.NoSuchPaddingException;
 import com.asierso.astracommons.SecureCipher;
 import com.asierso.astracommons.exceptions.RequestException;
 import com.asierso.astraconnector.actions.Action;
+import com.asierso.astraconnector.connection.AstraConnection;
 import com.asierso.astracommons.requests.ClientActions;
 import com.asierso.astracommons.requests.ClientRequest;
 import com.asierso.astracommons.requests.ClientResponse;

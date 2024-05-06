@@ -1,4 +1,4 @@
-package com.asierso.astraconnector;
+package com.asierso.astraconnector.connection;
 
 public class AstraConnection {
 	protected String ip;

@@ -1,7 +1,8 @@
-package com.asierso.astraconnector.actions;
+package com.asierso.astraconnector.actions.operations;
 
 import com.asierso.astracommons.exceptions.RequestException;
 import com.asierso.astraconnector.AstraConnector;
+import com.asierso.astraconnector.actions.Action;
 
 public class RunHook implements Action{
 

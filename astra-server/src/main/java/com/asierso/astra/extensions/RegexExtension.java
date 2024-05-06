@@ -10,31 +10,13 @@ import java.util.regex.Pattern;
  * @author Asierso
  */
 public class RegexExtension {
-
-    public static String replaceVarsOld(String text, List<String> args) {
-    	//Load pattern "$N"
-        Pattern pattern = Pattern.compile("\\$\\d+", Pattern.CASE_INSENSITIVE);
-        Matcher matcher = pattern.matcher(text);
-        
-        //Make replacement
-        StringBuilder replace = new StringBuilder();
-        while (matcher.find()) {
-            int index = Integer.parseInt(matcher.group().substring(1));
-            if (index >= 0 && index < args.size()) {
-                matcher.appendReplacement(replace, args.get(index));
-            }
-        }
-        matcher.appendTail(replace);
-        return replace.toString();
-    }
     
     public static String replaceOutput(String text, List<String> args) {
-    	System.out.println("Replace " + text);
-        return replace(text,"\\$\\{(\\d+)}",args);
+        return replace(text,"\\$\\{(\\d+)}",args); //Make replacement of pattern ${n}
     }
     
     public static String replaceParameters(String text, List<String> args) {
-        return replace(text,"\\$\\((\\d+)\\)",args);
+        return replace(text,"\\$\\((\\d+)\\)",args); //Make replacement of pattern $(n)
     }
     
     private static String replace(String text, String regex, List<String> args) {
@@ -45,10 +27,11 @@ public class RegexExtension {
         //Make replacement
         StringBuilder replace = new StringBuilder();
         while (matcher.find()) {
-        	System.out.println("v");
-            int index = Integer.parseInt(matcher.group(1));
+            int index = Integer.parseInt(matcher.group(1)); //first find index (of find sequence)
             if (index >= 0 && index < args.size()) {
                 matcher.appendReplacement(replace, args.get(index));
+            } else {
+            	throw new IndexOutOfBoundsException("Position " + index + " is out of bounds");
             }
         }
         matcher.appendTail(replace);
