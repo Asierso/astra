@@ -4,25 +4,18 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintStream;
-import java.io.Reader;
 import java.net.Socket;
 import java.net.UnknownHostException;
-import java.nio.charset.StandardCharsets;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
-import java.security.spec.InvalidKeySpecException;
 import java.security.spec.InvalidParameterSpecException;
-import java.util.List;
-
 import javax.crypto.BadPaddingException;
 import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
-
 import com.asierso.astracommons.SecureCipher;
 import com.asierso.astracommons.exceptions.RequestException;
 import com.asierso.astraconnector.actions.Action;
 import com.asierso.astraconnector.connection.AstraConnection;
-import com.asierso.astracommons.requests.ClientActions;
 import com.asierso.astracommons.requests.ClientRequest;
 import com.asierso.astracommons.requests.ClientResponse;
 import com.google.gson.Gson;

@@ -17,7 +17,9 @@ public class Server {
     }
     
     public void run() throws Exception {
+        @SuppressWarnings("resource")
         ServerSocket server = new ServerSocket(port);
+        
         System.out.println("Running server at port " + port);
         while (true) {
             Socket client = server.accept();

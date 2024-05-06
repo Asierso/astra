@@ -6,18 +6,14 @@ import com.asierso.astra.models.ScrapperManifest;
 import com.asierso.astra.scrapper.ModelLoader;
 import com.asierso.astra.sockets.Server;
 import com.asierso.astracommons.TokenExtension;
-import com.google.common.collect.Multiset.Entry;
 import com.google.gson.Gson;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
 import java.util.Scanner;
-import java.util.Set;
 
 /**
  *
@@ -32,7 +28,7 @@ public class Main {
 		// Get arguments
 		if (args.length > 0) {
 			// Get parameters order by parameter key
-			HashMap<String, String> parameters = new HashMap();
+			HashMap<String, String> parameters = new HashMap<String, String>();
 			for (int i = 0; i < args.length; i++) {
 				// Is a value and not a key
 				if (!args[i].startsWith("-"))
@@ -116,6 +112,7 @@ public class Main {
 			if (sc.nextLine().toLowerCase().charAt(0) == 'y') {
 				generateToken();
 			}
+			sc.close(); //close scanner
 			System.out.println("Config success. Insert .json models and start server again");
 		}
 	}

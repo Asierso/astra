@@ -2,16 +2,14 @@
 package com.asierso.astra.scrapper;
 
 import com.asierso.astracommons.exceptions.ActionException;
+import com.google.gson.Gson;
 import com.asierso.astra.FileManager;
 import com.asierso.astra.models.Action;
-import com.asierso.astra.models.ActionTypes;
 import com.asierso.astra.models.Action.FindableBy;
-import static com.asierso.astra.models.Action.FindableBy.*;
 
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -101,12 +99,17 @@ public class ScrapperEngine {
 				target.get(0).submit();
 			}
 			case GET_ALL_TEXT -> { // Get all target text
+				ArrayList<String> textsList = new ArrayList<>();
+				
 				if (target == null) {
 					throw new ActionException("Null target selected");
 				}
+				
 				for (WebElement handle : target) {
-					output += handle.getText() + " ";
+					textsList.add(handle.getText());
 				}
+				
+				output = new Gson().toJson(textsList);
 			}
 			case GET_ATTRIBUTE -> {
 				if (target == null) {
@@ -115,12 +118,17 @@ public class ScrapperEngine {
 				output = target.get(0).getAttribute(act.getParameters());
 			}
 			case GET_ALL_ATTRIBUTE -> {
+				ArrayList<String> attributesList = new ArrayList<>();
+
 				if (target == null) {
 					throw new ActionException("Null target selected");
 				}
+
 				for (WebElement handle : target) {
-					output += handle.getAttribute(act.getParameters()) + " ";
+					attributesList.add(handle.getAttribute(act.getParameters()));
 				}
+
+				output = new Gson().toJson(attributesList);
 			}
 			case JS -> {
 				FileManager jsloader = new FileManager(act.getParameters() + ".js");
@@ -131,6 +139,7 @@ public class ScrapperEngine {
 					System.out.println("Script not found exception " + e.getMessage() + " at " + e.getLocalizedMessage());
 				}
 			}
+			case HOOK -> {} //Nothing
 			}
 		} catch (ActionException e) {
 			System.out.println("Action exception " + e.getMessage() + " at " + e.getLocalizedMessage());

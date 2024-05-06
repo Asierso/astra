@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
-import java.util.Random;
 
 import com.asierso.astra.FileManager;
 
