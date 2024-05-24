@@ -1,6 +1,7 @@
 package com.asierso.astraconnector;
 
 import java.io.BufferedReader;
+import java.io.Closeable;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintStream;
@@ -21,13 +22,23 @@ import com.asierso.astracommons.requests.ClientResponse;
 import com.google.gson.Gson;
 import com.google.gson.JsonSyntaxException;
 
-public class AstraConnector {
+public class AstraConnector implements Closeable{
+	//Socket and streams
 	private Socket client;
 	private PrintStream out;
 	private BufferedReader in;
+	
+	//Connection and handshake
 	private AstraConnection currentConnection;
 	private SecureCipher crypt;
 	
+	/**
+	 * Initialize connection with Astra Server
+	 * @param builtConnection Server connection parameters 
+	 * @throws UnknownHostException Server host not found or the port is incorrect
+	 * @throws IOException Exception in data streaming
+	 * @throws Exception Other exceptions
+	 */
 	public AstraConnector(AstraConnection builtConnection) throws UnknownHostException, IOException, Exception {
 		//Create connection by builder
 		client = new Socket(builtConnection.getIp(), builtConnection.getPort());
@@ -36,6 +47,7 @@ public class AstraConnector {
 		
 		this.currentConnection = builtConnection;
 
+		//Try handshake (prepare ciphers)
 		try {
 			keyHandshake();
 		} catch (Exception e) {
@@ -61,18 +73,28 @@ public class AstraConnector {
 		}
 	}
 
+	/**
+	 * Run an action inside Astra Server. Actions must implement "Action" interface to be runnable
+	 * @param action New action to run in Astra
+	 * @return Server response
+	 * @throws Exception
+	 */
 	public Object fetch(Action action) throws Exception {
 		return action.run(this);
 	}
-
-	public void close() throws IOException {
-		client.close();
-	}
-
+	
 	private void keyHandshake() throws Exception {
 		crypt = new SecureCipher();
 		out.println(crypt.getPubkey());
 		crypt.setTargetPubkey(in.readLine());
 		crypt.setDecryptSimkey(crypt.asymDecrypt(in.readLine()));
+	}
+
+	/**
+	 * Close client socket with Astra. Compatible with try with resources
+	 */
+	@Override
+	public void close() throws IOException {
+		client.close();
 	}
 }

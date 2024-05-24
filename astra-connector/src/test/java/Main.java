@@ -27,8 +27,9 @@ public class Main {
 			System.out.println(res.getBody());
 			
 			Thread.sleep(10000);
+			
 			conn.close();
-			System.out.println("Handshake and open model test sucess");
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
