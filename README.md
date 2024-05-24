@@ -54,6 +54,13 @@ Recuerde que para poder usar el paquete debe de agregar la URL del repositorio a
 ## 🐳 Deploy del servidor Astra en Docker
 ### Requisitos previos
 - Docker instalado
+
+### Procedimiento de ejecución del contenedor (imagen de Dockerhub)
+Puede crear un contenedor de Astra usando la imagen oficial publicada en Dockerhub. Para esto, ejecute el comando `docker run -d -v <carpeta-models>:/home/astra/models -p 26700:26700 asierso/astra-server:latest` donde <carpeta-models> es la carpeta donde se almacenan los modelos JSON del scrapper
+
+## ⚒️🐳 Build de una nueva imagen de Astra
+### Requisitos previos
+- Docker instalado
 - Apache Maven instalado
 - Java JDK 18 o superior
 
